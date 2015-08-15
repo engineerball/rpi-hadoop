@@ -8,14 +8,13 @@ RUN apt-get update && apt-get install -y openjdk-7-jre openssh-server openssh-cl
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-armhf
 
-# Define default command
-CMD ["bash"]
-
-# Add user hadoop
-RUN groupadd hadoop && useradd -G hadoop hduser 
+USER root
 
 # SSH server configuration
-RUN su - hduser && mkdir ~/.ssh && ssh-keygen -t rsa -P "" -f ~/.ssh/id_rsa.pub && cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
+RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
+RUN ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
+RUN ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa
+RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 # Install hadoop 2.6
 RUN cd /opt && sudo wget  http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz 
