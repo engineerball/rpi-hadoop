@@ -68,7 +68,8 @@ RUN echo "Port 2122" >> /etc/ssh/sshd_config
 
 # download native support
 RUN mkdir -p /tmp/native
-RUN curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.0.tar | tar -x -C /tmp/native
+RUN wget http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.0.tar 
+RUN tar -x -C /tmp/native
 
 # fixing the libhadoop.so like a boss
 RUN rm -rf /usr/local/hadoop/lib/native
