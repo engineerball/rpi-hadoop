@@ -3,7 +3,7 @@ FROM resin/rpi-raspbian:wheezy
 MAINTAINER Teerapat Khunpech <ball@engineerball.com>
 
 # Install dependecies
-RUN apt-get update && apt-get install -y openjdk-7-jre openssh-server openssh-client curl wget --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y openjdk-7-jre openssh-server openssh-client curl wget maven build-essential autoconf automake libtool cmake zlib1g-dev pkg-config libssl-dev libfuse-dev libsnappy-dev libsnappy-java libbz2-dev subversion --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-armhf
@@ -17,9 +17,13 @@ RUN ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa
 RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 # Install hadoop 2.6
-RUN cd /opt && sudo wget  http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz 
-RUN sudo tar zvfx /opt/hadoop-2.7.0.tar.gz -C /opt 
-RUN sudo ln -s /opt/hadoop-2.7.0 /opt/hadoop 
+RUN cd /opt && sudo wget http://apache.mirrors.spacedump.net/hadoop/core/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz
+RUN sudo tar zvfx /opt/hadoop-2.7.0-src.tar.gz -C /opt 
+RUN sudo ln -s /opt/hadoop-2.6.0 /opt/hadoop 
+
+RUN wget https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz
+RUN tar xzvf protobuf-2.5.0.tar.gz
+RUN cd protobuf-2.5.0 && cd ./configure --prefix=/usr && make && make install
 
 ENV HADOOP_PREFIX /opt/hadoop
 ENV HADOOP_COMMON_HOME /opt/hadoop
