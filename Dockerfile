@@ -26,7 +26,8 @@ ENV HADOOP_COMMON_HOME /opt/hadoop
 ENV HADOOP_HDFS_HOME /opt/hadoop
 ENV HADOOP_MAPRED_HOME /opt/hadoop
 ENV HADOOP_YARN_HOME /opt/hadoop
-ENV HADOOP_CONF_DIR /opt/hadoop/etc/hadoop
+ENV HADOOP_CONF_DIR $HADOOP_PREFIX/etc/hadoop
+ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_PREFIX/etc/hadoop
 ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 
 RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-armhf\nexport HADOOP_PREFIX=/opt/hadoop\nexport HADOOP_HOME=/opt/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
@@ -52,10 +53,7 @@ ENV BOOTSTRAP /etc/bootstrap.sh
 
 
 # workingaround docker.io build error
-RUN ls -la /opt/hadoop/etc/hadoop/*-env.sh
 RUN chmod +x /opt/hadoop/etc/hadoop/*-env.sh
-RUN ls -la /opt/hadoop/etc/hadoop/*-env.sh
-
 
 ADD ssh_config /root/.ssh/config
 RUN chmod 600 /root/.ssh/config
