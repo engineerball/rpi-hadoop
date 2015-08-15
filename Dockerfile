@@ -18,7 +18,7 @@ RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 # Install hadoop 2.6
 RUN cd /opt && sudo wget http://apache.mirrors.spacedump.net/hadoop/core/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz
-RUN sudo tar zvfx /opt/hadoop-2.7.0-src.tar.gz -C /opt 
+RUN sudo tar zvfx /opt/hadoop-2.6.0-src.tar.gz -C /opt 
 RUN sudo ln -s /opt/hadoop-2.6.0 /opt/hadoop 
 
 RUN cd /tmp && wget https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz
