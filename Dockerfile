@@ -23,7 +23,7 @@ RUN sudo ln -s /opt/hadoop-2.6.0 /opt/hadoop
 
 RUN cd /tmp && wget https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz
 RUN tar xzvf /tmp/protobuf-2.5.0.tar.gz -C /tmp
-RUN cd /tmp/protobuf-2.5.0 && cd ./configure --prefix=/usr && make && make install
+RUN cd /tmp/protobuf-2.5.0 && ./configure --prefix=/usr && make && make install
 
 ENV HADOOP_PREFIX /opt/hadoop
 ENV HADOOP_COMMON_HOME /opt/hadoop
