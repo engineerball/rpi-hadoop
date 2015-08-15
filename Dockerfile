@@ -34,6 +34,11 @@ ENV HADOOP_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_PREFIX/etc/hadoop
 ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 
+RUN sudo unlink /opt/hadoop
+RUN ln -s /opt/hadoop.2.6.0-src /opt/hadoop
+
+
+
 RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-armhf\nexport HADOOP_PREFIX=/opt/hadoop\nexport HADOOP_HOME=/opt/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 RUN sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop/:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 
