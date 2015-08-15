@@ -21,7 +21,7 @@ RUN cd /opt && sudo wget http://apache.mirrors.spacedump.net/hadoop/core/hadoop-
 RUN sudo tar zvfx /opt/hadoop-2.7.0-src.tar.gz -C /opt 
 RUN sudo ln -s /opt/hadoop-2.6.0 /opt/hadoop 
 
-RUN wget https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz
+RUN cd /tmp && wget https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz
 RUN tar xzvf protobuf-2.5.0.tar.gz
 RUN cd protobuf-2.5.0 && cd ./configure --prefix=/usr && make && make install
 
